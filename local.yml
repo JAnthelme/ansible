@@ -1,6 +1,10 @@
 - hosts: localhost
   become: true
   tasks:
+  - name: Populate $PATH
+    copy:
+      dest: /etc/profile.d/custom-path.sh
+      content: 'PATH=$PATH:{{ my_custom_path_var }}'
   - name: Install packages
     apt: name={{item}}
     with_items:
